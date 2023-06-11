@@ -11,8 +11,8 @@ public class Polynomial {
     int[] exp;
 
     public Polynomial() {
-        this.coef = new double[] { 0 };
-        this.exp = new int[] { 0 };
+        this.coef = null;
+        this.exp = null;
     }
 
     public Polynomial(double[] new_coef, int[] new_exp) {
@@ -21,6 +21,10 @@ public class Polynomial {
         for (int i = 0; i < new_coef.length; i++) {
             this.coef[i] = new_coef[i];
             this.exp[i] = new_exp[i];
+        }
+        if (this.coef.length == 0) {
+            this.coef = null;
+            this.exp = null;
         }
     }
 
@@ -52,6 +56,14 @@ public class Polynomial {
     public Polynomial add(Polynomial p) {
         int max = 0;
         int coef_val = 0;
+
+        if (this.coef == null) {
+            return p;
+        }
+
+        if (p.coef == null) {
+            return this;
+        }
 
         for (int i = 0; i < p.exp.length; i++) {
             max = Math.max(p.exp[i], max);
@@ -99,11 +111,16 @@ public class Polynomial {
 
         no_zero_coef = Arrays.copyOf(no_zero_coef, new_length);
         no_zero_exp = Arrays.copyOf(no_zero_exp, new_length);
+
         return new Polynomial(no_zero_coef, no_zero_exp);
     }
 
     public double evaluate(double x) {
         double result = 0;
+        if (this.coef == null) {
+            return 0;
+        }
+
         for (int i = 0; i < this.coef.length; i++)
             result += coef[i] * Math.pow(x, exp[i]);
 
@@ -115,6 +132,10 @@ public class Polynomial {
     }
 
     public Polynomial multiply(Polynomial p) {
+        if (this.coef == null || p.coef == null) {
+            return new Polynomial();
+        }
+
         int max_a = 0;
         int max_b = 0;
 

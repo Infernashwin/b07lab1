@@ -59,32 +59,6 @@ public class Driver {
             e.printStackTrace();
         }
 
-        System.out.println("Test Evaluate:");
-        System.out.println("Received: " + p3.evaluate(5));
-        System.out.println("Expected: 612.0");
-        System.out.println();
-
-        System.out.println("Received: " + p4.evaluate(2));
-        System.out.println("Expected: 64.0");
-        System.out.println();
-
-        System.out.println("Received: " + p5.evaluate(0));
-        System.out.println("Expected: 0.0");
-        System.out.println();
-
-        System.out.println("Test HasRoot:");
-        System.out.println("Received: " + p3.hasRoot(1));
-        System.out.println("Expected: true");
-        System.out.println();
-
-        System.out.println("Received: " + p5.hasRoot(-1));
-        System.out.println("Expected: false");
-        System.out.println();
-
-        System.out.println("Received: " + p5.hasRoot(0));
-        System.out.println("Expected: true");
-        System.out.println();
-
         System.out.println("Test Add:");
         Polynomial sum = p4.add(p3);
         System.out.println("Received: " + Arrays.toString(sum.coef) + "  " + Arrays.toString(sum.exp));
@@ -103,7 +77,22 @@ public class Driver {
 
         Polynomial sum4 = p4.add(p6);
         System.out.println("Received: " + Arrays.toString(sum4.coef) + "  " + Arrays.toString(sum4.exp));
-        System.out.println("Expected: []  []");
+        System.out.println("Expected: null  null");
+        System.out.println();
+
+        Polynomial sum5 = sum4.add(sum4);
+        System.out.println("Received: " + Arrays.toString(sum5.coef) + "  " + Arrays.toString(sum5.exp));
+        System.out.println("Expected: null  null");
+        System.out.println();
+
+        Polynomial sum6 = sum5.add(sum3);
+        System.out.println("Received: " + Arrays.toString(sum6.coef) + "  " + Arrays.toString(sum6.exp));
+        System.out.println("Expected: [2.0, -3.0, -2.0, 2.0, 5.0, -6.0, 7.0, -8.0]  [0, 1, 2, 3, 4, 5, 6, 7]");
+        System.out.println();
+
+        Polynomial sum7 = sum3.add(sum5);
+        System.out.println("Received: " + Arrays.toString(sum7.coef) + "  " + Arrays.toString(sum7.exp));
+        System.out.println("Expected: [2.0, -3.0, -2.0, 2.0, 5.0, -6.0, 7.0, -8.0]  [0, 1, 2, 3, 4, 5, 6, 7]");
         System.out.println();
 
         System.out.println("Test Multiply:");
@@ -121,6 +110,54 @@ public class Driver {
         System.out.println("Received: " + Arrays.toString(prod3.coef) + "  " + Arrays.toString(prod3.exp));
         System.out.println(
                 "Expected: [96.0, -128.0, 160.0, -192.0, 224.0, -253.0, -4.0, 5.0, -6.0, 7.0, -8.0]  [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]");
+        System.out.println();
+
+        Polynomial prod4 = p5.multiply(sum4);
+        System.out.println("Received: " + Arrays.toString(prod4.coef) + "  " + Arrays.toString(prod4.exp));
+        System.out.println("Expected: null  null");
+        System.out.println();
+
+        Polynomial prod5 = sum4.multiply(p4);
+        System.out.println("Received: " + Arrays.toString(prod5.coef) + "  " + Arrays.toString(prod5.exp));
+        System.out.println("Expected: null  null");
+        System.out.println();
+
+        System.out.println("Test Evaluate:");
+        System.out.println("Received: " + p3.evaluate(5));
+        System.out.println("Expected: 612.0");
+        System.out.println();
+
+        System.out.println("Received: " + p4.evaluate(2));
+        System.out.println("Expected: 64.0");
+        System.out.println();
+
+        System.out.println("Received: " + p5.evaluate(0));
+        System.out.println("Expected: 0.0");
+        System.out.println();
+
+        System.out.println("Received: " + prod5.evaluate(0));
+        System.out.println("Expected: 0.0");
+        System.out.println();
+
+        System.out.println("Received: " + prod5.evaluate(1034));
+        System.out.println("Expected: 0.0");
+        System.out.println();
+
+        System.out.println("Test HasRoot:");
+        System.out.println("Received: " + p3.hasRoot(1));
+        System.out.println("Expected: true");
+        System.out.println();
+
+        System.out.println("Received: " + p5.hasRoot(-1));
+        System.out.println("Expected: false");
+        System.out.println();
+
+        System.out.println("Received: " + p5.hasRoot(0));
+        System.out.println("Expected: true");
+        System.out.println();
+
+        System.out.println("Received: " + prod5.hasRoot(9013));
+        System.out.println("Expected: true");
         System.out.println();
 
         System.out.println("Test Save To File:");
