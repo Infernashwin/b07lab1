@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Arrays;
 import java.io.File;
 
@@ -35,28 +34,30 @@ public class Polynomial {
         }
     }
 
-    public Polynomial(File file) throws IOException {
-        BufferedReader input = new BufferedReader(new FileReader(file));
-        String line = input.readLine();
-        String[] terms = line.split("(?=[+-])");
-        int index = 0;
-        this.coef = new double[terms.length];
-        this.exp = new int[terms.length];
+    public Polynomial(File file) {
+        try (BufferedReader input = new BufferedReader(new FileReader(file))) {
 
-        for (int i = 0; i < terms.length; i++) {
-            index = terms[i].indexOf('x');
-            if (index == -1) {
-                this.coef[i] = Double.parseDouble(terms[i]);
-                this.exp[i] = 0;
+            String line = input.readLine();
+            String[] terms = line.split("(?=[+-])");
+            int index = 0;
+            this.coef = new double[terms.length];
+            this.exp = new int[terms.length];
 
-            } else {
-                this.coef[i] = Double.parseDouble(terms[i].substring(0, index));
-                this.exp[i] = Integer.parseInt(terms[i].substring(index + 1));
+            for (int i = 0; i < terms.length; i++) {
+                index = terms[i].indexOf('x');
+                if (index == -1) {
+                    this.coef[i] = Double.parseDouble(terms[i]);
+                    this.exp[i] = 0;
+
+                } else {
+                    this.coef[i] = Double.parseDouble(terms[i].substring(0, index));
+                    this.exp[i] = Integer.parseInt(terms[i].substring(index + 1));
+                }
+
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        input.close();
 
     }
 
@@ -65,11 +66,17 @@ public class Polynomial {
         int coef_val = 0;
 
         if (this.coef == null) {
-            return p;
+            if (p.coef != null) {
+                return new Polynomial(p.coef, p.exp);
+            }
+            return new Polynomial();
         }
 
         if (p.coef == null) {
-            return this;
+            if (p.coef != null) {
+                return new Polynomial(this.coef, this.exp);
+            }
+            return new Polynomial();
         }
 
         for (int i = 0; i < p.exp.length; i++) {

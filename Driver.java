@@ -58,7 +58,7 @@ public class Driver {
             System.out.println("Received: " + Arrays.toString(p7.coef) + "  " + Arrays.toString(p7.exp));
             System.out.println("Expected: [5.0, -3.0, 7.0]  [0, 2, 8]");
             System.out.println();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         File f2 = new File("poly2.txt");
@@ -67,7 +67,7 @@ public class Driver {
             System.out.println("Received: " + Arrays.toString(p8.coef) + "  " + Arrays.toString(p8.exp));
             System.out.println("Expected: [3.0, 6.0, -2.0, 4.0, -8.0]  [0, 1, 2, 5, 9]");
             System.out.println();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
