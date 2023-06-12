@@ -18,13 +18,20 @@ public class Polynomial {
     public Polynomial(double[] new_coef, int[] new_exp) {
         this.coef = new double[new_coef.length];
         this.exp = new int[new_exp.length];
+        int list_size = 0;
         for (int i = 0; i < new_coef.length; i++) {
-            this.coef[i] = new_coef[i];
-            this.exp[i] = new_exp[i];
+            if (new_coef[i] != 0) {
+                this.coef[list_size] = new_coef[i];
+                this.exp[list_size] = new_exp[i];
+                list_size++;
+            }
         }
         if (this.coef.length == 0) {
             this.coef = null;
             this.exp = null;
+        } else {
+            this.coef = Arrays.copyOf(this.coef, list_size);
+            this.exp = Arrays.copyOf(this.exp, list_size);
         }
     }
 

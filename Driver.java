@@ -9,10 +9,11 @@ public class Driver {
         Polynomial p = new Polynomial();
         System.out.println(p.evaluate(3));
         double[] c1 = { 6, 0, 0, 5 };
-        int[] e1 = { 0, 1, 2, 3, 4 };
+        int[] e1 = { 0, 1, 2, 3 };
         Polynomial p1 = new Polynomial(c1, e1);
         double[] c2 = { 0, -2, 0, 0, -9 };
-        Polynomial p2 = new Polynomial(c2, e1);
+        int[] e2 = { 0, 1, 2, 3, 4 };
+        Polynomial p2 = new Polynomial(c2, e2);
         Polynomial s = p1.add(p2);
         System.out.println("s(0.1) = " + s.evaluate(0.1));
         if (s.hasRoot(1))
@@ -21,8 +22,8 @@ public class Driver {
             System.out.println("1 is not a root of s");
 
         // New Test Cases
-        double[] c3 = { 2, -3, -5, 6 };
-        int[] e3 = { 0, 1, 2, 3 };
+        double[] c3 = { 2, -3, -5, 6, 0 };
+        int[] e3 = { 0, 1, 2, 3, 7 };
         Polynomial p3 = new Polynomial(c3, e3);
 
         double[] c4 = { 32, 1 };
@@ -38,6 +39,17 @@ public class Driver {
         Polynomial p6 = new Polynomial(c6, e6);
 
         System.out.println("---------------NEW TESTS---------------");
+
+        System.out.println("Test Constructor:");
+        System.out.println("Recieved: " + Arrays.toString(p1.coef) + "  " + Arrays.toString(p1.exp));
+        System.out.println("Expected: [6.0, 5.0]  [0, 3]");
+        System.out.println();
+        System.out.println("Recieved: " + Arrays.toString(p3.coef) + "  " + Arrays.toString(p3.exp));
+        System.out.println("Expected: [2.0, -3.0, -5.0, 6.0]  [0, 1, 2, 3]");
+        System.out.println();
+        System.out.println("Recieved: " + Arrays.toString(p.coef) + "  " + Arrays.toString(p.exp));
+        System.out.println("Expected: null  null");
+        System.out.println();
 
         System.out.println("Test Read from File:");
         File f = new File("poly.txt");
